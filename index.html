@@ -1,302 +1,896 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind CSS with DaisyUI (Light Theme)</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tea House | Freshly Brewed Happiness</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Tailwind CSS and DaisyUI via CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
 
-    <!-- Tailwind and DaisyUI Configuration -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {},
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              manrope: ["Manrope", "sans-serif"],
             },
-            daisyui: {
-                themes: ["light"],
+            colors: {
+              tea: {
+                orange: "#f97316",
+                dark: "#201a17",
+                cream: "#fff7ed",
+              },
             },
-        }
+            boxShadow: {
+              soft: "0 18px 55px rgba(41, 25, 12, 0.09)",
+            },
+          },
+        },
+        daisyui: {
+          themes: ["light"],
+        },
+      };
     </script>
-</head>
-<body class="font_manrope">
 
-    <header class="container mx-auto">
-        <div class="hero ">
-            <div class="hero-content flex-col lg:flex-row">
-            
-              <div>
-                <h1 class="text-7xl font-extrbold">It's good <br>
-                    tea time at The<br> Tea House</h1>
-                <p class="py-6">
-                    Tea and Botanical Solutions Supplier Give Optimum Satisfaction To Your Taste Buds.
-                </p>
-                <button class="btn btn-primary">Explore More<i class="fa-solid fa-chart-line"></i></button>
-              </div>
-              <div>  <img
-                src="/images/banner.png"
-                           class="max-w-sm " />
-                           <!--rating badge-->
-                    <div class=" -mt-16 items-center flex gap-4 drop-shadow-lg bg-slate-100 p-5 w-60"> <i class="fa-regular fa-star text-3xl 
-                        text-amber-400"></i><div> 
-                        <h3 class="text-3xl">5.00</h3>
-                        <p>Trust pilot ratings</p>
-                    </div></div>
-                        </div>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
 
+      body {
+        font-family: "Manrope", sans-serif;
+        color: #29221e;
+      }
+
+      .section-wrap {
+        width: min(1180px, calc(100% - 2rem));
+        margin-inline: auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ea580c;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 25px;
+        height: 2px;
+        background: #fb923c;
+        border-radius: 99px;
+      }
+
+      .tea-card {
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .tea-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 22px 45px rgba(41, 25, 12, 0.12);
+      }
+
+      /* Spider-Man hero background */
+      .spider-hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at 78% 28%,
+            rgba(239, 68, 68, 0.25),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 15% 90%,
+            rgba(37, 99, 235, 0.25),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #080e1b 0%, #111827 52%, #1f2937 100%);
+      }
+
+      .spider-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.16;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.13) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(to right, transparent, black);
+      }
+
+      .spider-glow {
+        position: absolute;
+        width: 24rem;
+        height: 24rem;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.25;
+        pointer-events: none;
+      }
+
+      .spider-image {
+        filter: drop-shadow(0 28px 35px rgba(0, 0, 0, 0.38));
+        transition: transform 0.5s ease;
+      }
+
+      .spider-image:hover {
+        transform: translateY(-7px) rotate(1deg);
+      }
+
+      .review-card {
+        box-shadow: 0 18px 45px rgba(38, 20, 10, 0.12);
+      }
+
+      @media (max-width: 640px) {
+        .section-wrap {
+          width: calc(100% - 1.25rem);
+        }
+
+        .spider-hero::before {
+          background-size: 28px 28px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-white font-manrope antialiased">
+    <!-- HEADER -->
+    <header class="section-wrap pt-5 sm:pt-8">
+      <nav
+        class="navbar rounded-2xl border border-orange-100 bg-white/90 px-4 shadow-sm backdrop-blur"
+      >
+        <div class="flex-1 gap-2">
+          <div
+            class="grid h-10 w-10 place-items-center rounded-xl bg-orange-500 text-white shadow-md"
+          >
+            <i class="fa-solid fa-mug-hot text-lg"></i>
+          </div>
+
+          <a href="#" class="text-lg font-extrabold tracking-tight sm:text-xl">
+            Tea<span class="text-orange-500">House</span>
+          </a>
+        </div>
+
+        <div class="hidden items-center gap-7 md:flex">
+          <a
+            href="#featured"
+            class="text-sm font-semibold text-stone-600 transition hover:text-orange-600"
+            >Our teas</a
+          >
+          <a
+            href="#story"
+            class="text-sm font-semibold text-stone-600 transition hover:text-orange-600"
+            >Our story</a
+          >
+          <a
+            href="#reviews"
+            class="text-sm font-semibold text-stone-600 transition hover:text-orange-600"
+            >Reviews</a
+          >
+
+          <a
+            href="#contact"
+            class="btn btn-sm rounded-full border-0 bg-stone-900 px-5 text-white hover:bg-orange-600"
+          >
+            Contact us
+          </a>
+        </div>
+
+        <!-- Mobile navigation -->
+        <div class="dropdown dropdown-end md:hidden">
+          <label
+            tabindex="0"
+            class="btn btn-ghost btn-circle"
+            aria-label="Open navigation menu"
+          >
+            <i class="fa-solid fa-bars text-xl"></i>
+          </label>
+
+          <ul
+            tabindex="0"
+            class="menu dropdown-content z-50 mt-3 w-48 rounded-2xl border border-orange-100 bg-white p-3 shadow-xl"
+          >
+            <li><a href="#featured">Our teas</a></li>
+            <li><a href="#story">Our story</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact us</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- MAIN TEA HOUSE HERO -->
+      <section
+        class="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2 lg:gap-14 lg:py-20"
+      >
+        <div class="order-2 lg:order-1">
+          <span class="eyebrow">A little cup of happiness</span>
+
+          <h1
+            class="mt-5 max-w-xl text-4xl font-extrabold leading-[1.12] tracking-tight text-stone-900 sm:text-5xl lg:text-6xl xl:text-7xl"
+          >
+            It's good tea time at
+            <span class="text-orange-500">The Tea House.</span>
+          </h1>
+
+          <p
+            class="mt-6 max-w-lg text-base leading-8 text-stone-600 sm:text-lg"
+          >
+            Tea and botanical solutions crafted with care, bringing fresh
+            flavors and a little calm to every moment.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#featured"
+              class="btn min-h-14 rounded-xl border-0 bg-orange-500 px-7 text-base font-bold text-white shadow-lg shadow-orange-200 hover:bg-orange-600"
+            >
+              Explore our teas
+              <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+
+            <a
+              href="#story"
+              class="btn min-h-14 rounded-xl border-stone-200 bg-white px-7 text-base font-bold text-stone-700 hover:border-orange-300 hover:bg-orange-50"
+            >
+              Our story
+            </a>
+          </div>
+
+          <div
+            class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-stone-500"
+          >
+            <span
+              ><i class="fa-solid fa-leaf mr-2 text-green-600"></i>Carefully
+              selected leaves</span
+            >
+            <span
+              ><i class="fa-solid fa-heart mr-2 text-rose-500"></i>Made with
+              care</span
+            >
+          </div>
+        </div>
+
+        <div class="relative order-1 mx-auto w-full max-w-lg lg:order-2">
+          <div
+            class="absolute inset-8 rounded-full bg-orange-200/70 blur-3xl"
+          ></div>
+
+          <img
+            src="/images/banner.png"
+            alt="A freshly brewed cup of tea"
+            class="relative mx-auto max-h-[430px] w-full object-contain drop-shadow-xl"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'grid';
+            "
+          />
+
+          <div
+            style="display: none"
+            class="relative mx-auto aspect-square max-w-sm place-items-center rounded-[2rem] bg-gradient-to-br from-orange-100 to-amber-200 text-orange-700"
+          >
+            <i class="fa-solid fa-mug-hot text-8xl"></i>
+          </div>
+
+          <!-- Rating badge -->
+          <div
+            class="absolute bottom-2 left-2 flex items-center gap-3 rounded-2xl border border-white/70 bg-white/95 p-4 shadow-soft sm:bottom-5 sm:left-0"
+          >
+            <span
+              class="grid h-12 w-12 place-items-center rounded-xl bg-amber-100 text-2xl text-amber-500"
+            >
+              <i class="fa-solid fa-star"></i>
+            </span>
+
+            <div>
+              <p class="text-xl font-extrabold text-stone-900">
+                5.00 <span class="text-amber-500">★★★★★</span>
+              </p>
+              <p class="text-xs font-semibold text-stone-500">
+                Loved by tea enthusiasts
+              </p>
             </div>
           </div>
 
-
+          <div
+            class="absolute right-0 top-5 rounded-full border border-orange-100 bg-white px-4 py-2 text-xs font-extrabold text-orange-600 shadow-sm sm:right-2"
+          >
+            100% tea moments
+          </div>
+        </div>
+      </section>
     </header>
-    
-    <main class="container mx-auto">
-        <!--featured section-->
-        <section class="text-center my-24 mb-5">
-            <h2 class="text-5xl">Our Featured Products</h2>
-            <p class="lg:max-w-3xl mx-auto">There are many variations of passages of Lorem Ipsum available, but the 
-                majority have suffered alteration in some form, by injected humour, 
-                or randomised words which don't look even slightly believable. </p>
 
-                <!--card container-->
+    <main>
+      <!-- FEATURED PRODUCTS -->
+      <section id="featured" class="section-wrap py-16 sm:py-20">
+        <div class="mx-auto max-w-2xl text-center">
+          <span class="eyebrow">Find your favorite</span>
 
-    <div class="gap-8 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <h2
+            class="mt-4 text-3xl font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+          >
+            Our Featured Products
+          </h2>
 
-        <!--first card-->
-        <div class="p-8 card bg-gradient-to-r from-[#F4F4F4] to-[#f4F4F4]  shadow-xl">
-          <figure>
+          <p class="mt-4 leading-7 text-stone-600">
+            From creamy classics to refreshing blends, discover a tea for every
+            mood and every part of your day.
+          </p>
+        </div>
+
+        <div
+          class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+        >
+          <article
+            class="tea-card card border border-stone-100 bg-gradient-to-b from-orange-50 to-white p-6 shadow-sm"
+          >
+            <figure class="grid h-44 place-items-center">
+              <img
+                src="/images/tea-1.png"
+                alt="Milk tea"
+                class="max-h-40 object-contain"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body items-center px-1 pb-2 pt-5 text-center">
+              <h3 class="text-xl font-extrabold">Milk Tea</h3>
+              <p class="text-sm leading-6 text-stone-500">
+                Smooth, creamy comfort in every sip.
+              </p>
+              <span
+                class="mt-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-orange-600"
+                >Customer favorite</span
+              >
+            </div>
+          </article>
+
+          <article
+            class="tea-card card border border-stone-100 bg-gradient-to-b from-stone-100 to-white p-6 shadow-sm"
+          >
+            <figure class="grid h-44 place-items-center">
+              <img
+                src="/images/tea-2.png"
+                alt="Black tea"
+                class="max-h-40 object-contain"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body items-center px-1 pb-2 pt-5 text-center">
+              <h3 class="text-xl font-extrabold">Black Tea</h3>
+              <p class="text-sm leading-6 text-stone-500">
+                Bold, rich flavor to start your day.
+              </p>
+              <span
+                class="mt-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-stone-600"
+                >A timeless classic</span
+              >
+            </div>
+          </article>
+
+          <article
+            class="tea-card card border border-stone-100 bg-gradient-to-b from-yellow-50 to-white p-6 shadow-sm"
+          >
+            <figure class="grid h-44 place-items-center">
+              <img
+                src="/images/tea-3.png"
+                alt="Lemon tea"
+                class="max-h-40 object-contain"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body items-center px-1 pb-2 pt-5 text-center">
+              <h3 class="text-xl font-extrabold">Lemon Tea</h3>
+              <p class="text-sm leading-6 text-stone-500">
+                Bright citrus notes with a refreshing finish.
+              </p>
+              <span
+                class="mt-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-yellow-700"
+                >Fresh &amp; bright</span
+              >
+            </div>
+          </article>
+
+          <article
+            class="tea-card card border border-stone-100 bg-gradient-to-b from-green-50 to-white p-6 shadow-sm"
+          >
+            <figure class="grid h-44 place-items-center">
+              <img
+                src="/images/tea-4.png"
+                alt="Green tea"
+                class="max-h-40 object-contain"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body items-center px-1 pb-2 pt-5 text-center">
+              <h3 class="text-xl font-extrabold">Green Tea</h3>
+              <p class="text-sm leading-6 text-stone-500">
+                Light, delicate, and wonderfully calming.
+              </p>
+              <span
+                class="mt-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-green-700"
+                >A gentle ritual</span
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- GREAT TEA SECTION -->
+      <section
+        id="story"
+        class="section-wrap grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-2 lg:gap-16"
+      >
+        <div class="grid grid-cols-2 gap-4 sm:gap-5">
+          <div
+            class="flex min-h-32 items-center justify-center rounded-3xl bg-gradient-to-br from-rose-100 to-orange-100 p-5"
+          >
+            <i class="fa-solid fa-seedling text-5xl text-orange-500/70"></i>
+          </div>
+
+          <div
+            class="row-span-2 flex min-h-64 items-center justify-center rounded-3xl bg-amber-100 p-5 sm:min-h-80"
+          >
             <img
-              src="/images/tea-1.png"
-              alt="Shoes" />
-          </figure>
-          <div class="card-body text-center">
-            <h2 class="text-center text-2xl font-bold">Milk tea</h2>
-            <p>Creamer could be replaced by fresh milk</p>
-            
+              src="/images/fresh-1.png"
+              alt="Freshly prepared tea"
+              class="max-h-72 object-contain"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="row-span-2 flex min-h-64 items-center justify-center rounded-3xl bg-sky-100 p-5 sm:min-h-80"
+          >
+            <img
+              src="/images/fresh-2.png"
+              alt="Premium tea ingredients"
+              class="max-h-72 object-contain"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="flex min-h-32 items-center justify-center rounded-3xl bg-gradient-to-br from-stone-50 to-stone-200 p-5"
+          >
+            <i class="fa-solid fa-mug-saucer text-5xl text-stone-500/70"></i>
           </div>
         </div>
 
-        <!--second card-->
-        <div class="p-8 card bg-gradient-to-r from-[#F4F4F4] to-[#f4F4F4] shadow-xl">
-          <figure>
-            <img
-              src="/images/tea-2.png"
-              alt="Shoes" />
-          </figure>
-          <div class="card-body text-center">
-            <h2 class="text-center text-2xl font-bold">Black tea</h2>
-            <p>Creamer could be replaced by fresh milk</p>
-            
+        <div>
+          <span class="eyebrow">Our promise</span>
+
+          <h2
+            class="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl"
+          >
+            Great Tea, Freshly Presented
+          </h2>
+
+          <p class="mt-5 leading-8 text-stone-600">
+            We believe a great cup of tea is more than a drink. It is a small
+            daily ritual made memorable by quality ingredients, thoughtful
+            preparation, and a warm welcome.
+          </p>
+
+          <div class="mt-8 space-y-6">
+            <div class="flex gap-4">
+              <span
+                class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-orange-100 text-orange-600"
+              >
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </span>
+
+              <div>
+                <h3 class="font-extrabold">Unique taste</h3>
+                <p class="mt-1 leading-7 text-stone-600">
+                  Distinctive blends and carefully balanced flavors for a
+                  delightful experience.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <span
+                class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-green-100 text-green-700"
+              >
+                <i class="fa-solid fa-award"></i>
+              </span>
+
+              <div>
+                <h3 class="font-extrabold">Premium quality</h3>
+                <p class="mt-1 leading-7 text-stone-600">
+                  A commitment to quality in every leaf, every blend, and every
+                  cup we serve.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <!--third card-->
-        <div class="p-8 card bg-gradient-to-r from-[#F4F4F4] to-[#f4F4F4]  shadow-xl">
-          <figure>
-            <img
-              src="/images/tea-3.png"
-              alt="Shoes" />
-          </figure>
-          <div class="card-body text-center">
-            <h2 class="text-center text-2xl font-bold">Lemon tea</h2>
-            <p>Creamer could be replaced by fresh milk</p>
-            
+      <!-- CUSTOMER REVIEWS -->
+      <section
+        id="reviews"
+        class="section-wrap my-12 overflow-hidden rounded-[2rem] bg-gradient-to-br from-orange-500 via-orange-600 to-red-600 px-5 py-12 sm:my-16 sm:px-10 sm:py-16 lg:px-14"
+      >
+        <div class="grid items-center gap-12 lg:grid-cols-[.85fr_1.15fr]">
+          <div>
+            <span
+              class="text-xs font-extrabold uppercase tracking-[.2em] text-orange-100"
+            >
+              Kind words, real moments
+            </span>
+
+            <h2
+              class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl"
+            >
+              Meet our happy tea lovers
+            </h2>
+
+            <p class="mt-5 max-w-md leading-8 text-orange-50">
+              Every cup is an opportunity to make someone's day a little
+              brighter. Here's what our community has to say.
+            </p>
+
+            <a
+              href="#contact"
+              class="btn mt-7 rounded-xl border-0 bg-white px-6 font-bold text-orange-700 hover:bg-orange-50"
+            >
+              Share your experience
+              <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <article
+              class="review-card rounded-2xl bg-white p-6 sm:translate-y-7"
+            >
+              <div class="mb-4 flex items-center gap-3">
+                <img
+                  src="/images/client.png"
+                  alt="Customer portrait"
+                  class="h-12 w-12 rounded-full border-2 border-orange-100 object-cover"
+                  loading="lazy"
+                />
+                <div>
+                  <h3 class="font-extrabold">Ilaham Yudha</h3>
+                  <p class="text-xs text-stone-500">Tea enthusiast</p>
+                </div>
+              </div>
+
+              <div class="mb-3 text-sm tracking-widest text-amber-500">
+                ★★★★★
+              </div>
+
+              <p class="text-sm leading-7 text-stone-600">
+                “A lovely place to pause, relax, and enjoy a really satisfying
+                cup of tea. The quality shines through.”
+              </p>
+
+              <div class="mt-5 flex justify-end">
+                <img
+                  src="/images/circles.png"
+                  alt=""
+                  class="h-7 w-auto opacity-70"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+
+            <article class="review-card rounded-2xl bg-white p-6">
+              <div class="mb-4 flex items-center gap-3">
+                <div
+                  class="grid h-12 w-12 place-items-center rounded-full bg-sky-100 text-lg font-extrabold text-sky-700"
+                >
+                  AR
+                </div>
+                <div>
+                  <h3 class="font-extrabold">Ayesha Rahman</h3>
+                  <p class="text-xs text-stone-500">Regular customer</p>
+                </div>
+              </div>
+
+              <div class="mb-3 text-sm tracking-widest text-amber-500">
+                ★★★★★
+              </div>
+
+              <p class="text-sm leading-7 text-stone-600">
+                “Fresh flavors, a welcoming feel, and a great selection. The
+                lemon tea is my go-to whenever I need a refresh.”
+              </p>
+
+              <div class="mt-5 flex justify-end">
+                <img
+                  src="/images/circles.png"
+                  alt=""
+                  class="h-7 w-auto opacity-70"
+                  loading="lazy"
+                />
+              </div>
+            </article>
           </div>
         </div>
+      </section>
 
-        <!--fourth card-->
-        <div class="p-8 card bg-gradient-to-r from-[#F4F4F4] to-[#f4F4F4]  shadow-xl">
-          <figure>
-            <img
-              src="/images/tea-4.png"
-              alt="Shoes" />
-          </figure>
-          <div class="card-body text-center">
-            <h2 class="text-center text-2xl font-bold">Green tea</h2>
-            <p>Creamer could be replaced by fresh milk</p>
-            
+      <!-- SPIDER-MAN HERO SECTION -->
+      <section class="section-wrap py-12 sm:py-16">
+        <div
+          class="spider-hero rounded-[2rem] px-5 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16"
+        >
+          <div class="spider-glow left-[-6rem] top-[-6rem] bg-blue-500"></div>
+          <div class="spider-glow bottom-[-8rem] right-[15%] bg-red-500"></div>
+
+          <div
+            class="relative z-10 grid items-center gap-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-10"
+          >
+            <div class="text-center lg:text-left">
+              <span
+                class="inline-flex items-center gap-2 rounded-full border border-red-300/30 bg-red-500/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[.18em] text-red-200"
+              >
+                <i class="fa-solid fa-bolt"></i>
+                Featured spotlight
+              </span>
+
+              <h2
+                class="mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
+              >
+                A hero-sized story.
+                <span class="text-red-400">An iconic</span> adventure.
+              </h2>
+
+              <p
+                class="mx-auto mt-5 max-w-xl text-base leading-8 text-slate-300 sm:text-lg lg:mx-0"
+              >
+                Step into a world of action, courage, and unforgettable moments.
+                Explore the story behind one of the most beloved heroes on the
+                big screen.
+              </p>
+
+              <div
+                class="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start"
+              >
+                <a
+                  href="#contact"
+                  class="btn min-h-12 rounded-xl border-0 bg-red-500 px-6 font-bold text-white shadow-lg shadow-red-950/30 hover:bg-red-400"
+                >
+                  Explore the feature
+                  <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
+
+                <a
+                  href="#featured"
+                  class="btn min-h-12 rounded-xl border border-white/20 bg-white/5 px-6 font-bold text-white hover:bg-white/10"
+                >
+                  Back to Tea House
+                </a>
+              </div>
+
+              <div
+                class="mt-8 flex flex-wrap justify-center gap-5 text-xs font-semibold text-slate-400 lg:justify-start"
+              >
+                <span
+                  ><i class="fa-solid fa-film mr-2 text-red-400"></i>Cinematic
+                  spotlight</span
+                >
+                <span
+                  ><i class="fa-solid fa-mask mr-2 text-blue-300"></i>Heroic
+                  moments</span
+                >
+              </div>
+            </div>
+
+            <!--  image -->
+            <div class="relative mx-auto w-full max-w-md">
+              <div
+                class="absolute inset-8 rounded-full bg-red-500/30 blur-3xl"
+              ></div>
+              <div
+                class="absolute inset-x-8 bottom-0 h-10 rounded-full bg-black/50 blur-xl"
+              ></div>
+
+              <img
+                src="images/yagmur-cetin-52mhbx3-IFI-unsplash.jpg"
+                alt="Spider-Man in a cinematic superhero scene"
+                class="spider-image relative z-10 mx-auto max-h-[460px] w-full rounded-3xl object-cover shadow-2xl ring-1 ring-white/15"
+                loading="lazy"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'images/yagmur-cetin-52mhbx3-IFI-unsplash.jpg';
+                "
+              />
+
+              <div
+                class="absolute -bottom-3 -left-2 z-20 rounded-2xl border border-white/10 bg-slate-900/90 px-4 py-3 shadow-xl backdrop-blur sm:-left-5"
+              >
+                <p
+                  class="text-[10px] font-extrabold uppercase tracking-[.18em] text-red-300"
+                >
+                  Power • Purpose • Courage
+                </p>
+                <p class="mt-1 text-sm font-bold text-white">The hero within</p>
+              </div>
+
+              <div
+                class="absolute -right-1 top-5 z-20 grid h-14 w-14 place-items-center rounded-2xl border border-white/20 bg-white/10 text-2xl text-white shadow-lg backdrop-blur sm:-right-4"
+              >
+                <i class="fa-solid fa-spider"></i>
+              </div>
+            </div>
           </div>
         </div>
-      
-
-        </section>
-
-<!--great tea-->
-<section class="my-24 flex flex-col lg:flex-row gap-12"> 
-<div class="grid gap-8 grid-cols-1 md:grid-cols-2 flex-1"> 
-  <div class="rounded-xl h-36 bg-gradient-to-r from-red-100 to-orange-100 "></div>
-  <div class="row-span-2 rounded-xl bg-[#ffe8bade]
-  justify-center flex px-8 py-12"><img src="/images/fresh-1.png" alt=""></div>
-  <div class="row-span-2 rounded-xl bg-[#dff2ffde]
-  justify-center flex px-8 py-12"><img src="/images/fresh-2.png" alt=""></div>
-
-
-  <div class="rounded-xl h-36 bg-gradient-to-r from-white to-gray-300 "></div>
-
-  
-
-</div>
-<div class="space-y-5 flex-1">
-  <h3 class="text-5xl font-extrabold">Great Tea, Freshly <br>Presented</h3>
-  <p my-5>The meaning of gong cha is chanese is to provide the best tea to emperor from all possessions . It represents the highest quality and self expectation. Establishing in 2006, Gong cha had been deeply appreciated by its custoers  because of
-     good words of mouth and unique customized service orginated from Taiwan.</p>
-
-     <h4 class="text-xl font-extrabold my-8">Unique taste</h4>
-     <p>A Unique and different style from othe
-       teapots gives <br>a luxurious and minimalist impression</p>
-     <h4 class="text-xl font-extrabold my-8">Premium quality</h4>
-     <p>A Unique and different style from other<br>
-       teapots gives a luxurious and minimalist impression</p>
-
-</div>
-
-
-
-</section>
-
-<!--super clients section-->
-<section class="my-24 flex flex-col lg:flex-row gap-12 rounded-xl bg-gradient-to-r from-orange-500 to-red-500
-px-16 py-20
-">
-  <div class=" flex pr-28 items-center"> <div class="space-y-5">
-
-    <h2 class="text-5xl font-extrabold text-white">Meet our super<br>Clients</h2>
-    <p class="text-white"> There are many variations of passages of Lorem Ipsum available, but
-       the majority have suffered alteration in some f
-       orm, by injected humour, or randomised 
-       words which don't look even slightly believable. </p>
-       <button class=" btn btn-primary">Show all</button>
-  
-
-  </div>
-  
-  </div>
-
-  <!--review container -->
-<div class="relative"> 
-   <!--customer previous review-->
-  <div class="relative opacity-40 p-10 rounded-lg bg-white mb-16 z-10">
-    <img class="absolute -left-5 -mt-16 border-4 rounded-full bg-white " src="/images/client.png" alt="">
-    <p>We are providing the best and suitable home <br>
-      insurance services for the people who are interested to treatment</p>
-      <h3 class="font-bold">Ilaham Yudha</h3>
-    <p class="font-medium">Businessman</p>
-   <div class="flex justify-end"> <img src="/images/circles.png" alt=""></div>
-  
-  </div>
-<div>  <!--customer current review-->
-  <div class="absolute p-10 rounded-lg bg-white top-40 z-20 lg:-left-32 lg:w-[430px]">
-    <img class="absolute -left-5 -mt-16 border-4 rounded-full bg-white " src="/images/client.png" alt="">
-    <p>We are providing the best and suitable home <br>
-      insurance services for the people who are interested to treatment</p>
-      <h3 class="font-bold">Ilaham Yudha</h3>
-    <p class="font-medium">Businessman</p>
-   <div class="flex justify-end"> <img src="/images/circles.png" alt=""></div>
-  
-  </div>
-<div>  <!--customer after review-->
-  <div class="relative opacity-40 p-10 rounded-lg bg-white z-10">
-    <img class="absolute -left-5 -mt-16 border-4 rounded-full bg-white " src="/images/client.png" alt="">
-    <p>We are providing the best and suitable home <br>
-      insurance services for the people who are interested to treatment</p>
-      <h3 class="font-bold">Ilaham Yudha</h3>
-    <p class="font-medium">Businessman</p>
-   <div class="flex justify-end"> <img src="/images/circles.png" alt=""></div>
-  
-  </div>
-
-
-
-
-</div>
-
-
-
-</section>
-<div class="hero bg-base-200 min-h-screen"></div>
-  <div class="hero-content flex-col lg:flex-row">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-      class="max-w-sm rounded-lg shadow-2xl" />
-    <div>
-      <h1 class="text-5xl font-bold">Box Office News!</h1>
-      <p class="py-6">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
-      </p>
-      <button class="btn btn-primary">Get Started</button>
-    </div>
-  </div>
-</div>
-
-
-
+      </section>
     </main>
 
-    <footer class="p-48 bg-pink-200 text-base-content">
-      <div class="flex justify-between my-24"> <img class="" src="/images/cup.png" alt="">
-        <p>
-          <span> Ready to get started
-          </span>
-          <button class=" btn btn-primary">Get started</button>
-        </p>
-      
-      </div>
-     <div class="footer  text-black p-10">
-      <nav>
-        <h6 class="footer-title">Services</h6>
-        <a class="link link-hover">Branding</a>
-        <a class="link link-hover">Design</a>
-        <a class="link link-hover">Marketing</a>
-        <a class="link link-hover">Advertisement</a>
-      </nav>
-      <nav>
-        <h6 class="footer-title">Company</h6>
-        <a class="link link-hover">About us</a>
-        <a class="link link-hover">Contact</a>
-        <a class="link link-hover">Jobs</a>
-        <a class="link link-hover">Press kit</a>
-      </nav>
-      <nav>
-        <h6 class="footer-title">Legal</h6>
-        <a class="link link-hover">Terms of use</a>
-        <a class="link link-hover">Privacy policy</a>
-        <a class="link link-hover">Cookie policy</a>
-      </nav>
-      <form>
-        <h6 class="footer-title">Newsletter</h6>
-        <fieldset class="form-control w-80">
-          <label class="label">
-            <span class="label-text">Enter your email address</span>
-          </label>
-          <div class="join">
-            <input
-              type="text"
-              placeholder="username@site.com"
-              class="input input-bordered join-item" />
-            <button class="btn btn-primary join-item">Subscribe</button>
+    <!-- FOOTER -->
+    <footer id="contact" class="mt-10 bg-orange-50">
+      <div class="section-wrap py-12 sm:py-16">
+        <div
+          class="flex flex-col gap-6 rounded-3xl border border-orange-100 bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-8"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-orange-100 text-2xl text-orange-600"
+            >
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+
+            <div>
+              <h2 class="text-xl font-extrabold sm:text-2xl">
+                Ready for a better tea break?
+              </h2>
+              <p class="mt-1 text-sm leading-6 text-stone-500">
+                Find your new favorite blend today.
+              </p>
+            </div>
           </div>
-        </fieldset>
-      </form>
-      
 
-     </div>
-      <div class="mt-4 text-center">
-        <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
+          <a
+            href="#featured"
+            class="btn rounded-xl border-0 bg-orange-500 px-6 text-white hover:bg-orange-600"
+          >
+            Get started
+            <i class="fa-solid fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+
+        <div
+          class="footer mt-10 grid grid-cols-2 gap-8 px-0 py-8 text-stone-700 sm:grid-cols-2 md:grid-cols-4"
+        >
+          <nav>
+            <h3 class="footer-title text-stone-900">Explore</h3>
+            <a href="#featured" class="link link-hover">Our teas</a>
+            <a href="#story" class="link link-hover">Our story</a>
+            <a href="#reviews" class="link link-hover">Reviews</a>
+          </nav>
+
+          <nav>
+            <h3 class="footer-title text-stone-900">Company</h3>
+            <a href="#story" class="link link-hover">About us</a>
+            <a href="#contact" class="link link-hover">Contact</a>
+            <a href="#featured" class="link link-hover">Our products</a>
+          </nav>
+
+          <nav>
+            <h3 class="footer-title text-stone-900">Information</h3>
+            <a href="#contact" class="link link-hover">Privacy policy</a>
+            <a href="#contact" class="link link-hover">Terms of use</a>
+            <a href="#contact" class="link link-hover">FAQs</a>
+          </nav>
+
+          <form
+            onsubmit="
+              event.preventDefault();
+              const note = this.querySelector('[data-newsletter-note]');
+              note.textContent = 'Thanks for subscribing!';
+              this.reset();
+            "
+          >
+            <h3 class="footer-title text-stone-900">Tea notes</h3>
+
+            <p class="mb-2 text-sm leading-6 text-stone-500">
+              Get occasional updates and fresh inspiration.
+            </p>
+
+            <div class="join w-full">
+              <input
+                type="email"
+                required
+                aria-label="Email address"
+                placeholder="Your email"
+                class="input input-bordered join-item min-w-0 w-full bg-white"
+              />
+
+              <button
+                type="submit"
+                class="btn join-item border-0 bg-stone-900 text-white hover:bg-orange-600"
+                aria-label="Subscribe"
+              >
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+
+            <p
+              data-newsletter-note
+              class="mt-2 text-xs font-semibold text-green-700"
+              aria-live="polite"
+            ></p>
+          </form>
+        </div>
+
+        <div
+          class="flex flex-col items-center justify-between gap-4 border-t border-orange-200 pt-6 text-center text-xs text-stone-500 sm:flex-row sm:text-left"
+        >
+          <a href="#" class="text-base font-extrabold text-stone-900">
+            Tea<span class="text-orange-500">House</span>
+          </a>
+
+          <p>© <span id="year"></span> Tea House. Crafted with care.</p>
+
+          <div class="flex gap-4 text-lg">
+            <a
+              href="#contact"
+              aria-label="Instagram"
+              class="transition hover:text-orange-600"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a
+              href="#contact"
+              aria-label="Facebook"
+              class="transition hover:text-orange-600"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a
+              href="#contact"
+              aria-label="Pinterest"
+              class="transition hover:text-orange-600"
+              ><i class="fa-brands fa-pinterest"></i
+            ></a>
+          </div>
+        </div>
       </div>
-
-
-
     </footer>
 
-
-
-   
-</body>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
